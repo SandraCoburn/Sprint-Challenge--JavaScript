@@ -76,20 +76,27 @@ const graduates = [
 /* Request 1: Create a new array called universities that contains all the universities in the graduates array. This will be an array of strings.
 
 Once you have the new array created, sort the universities alphabetically and log the result. */
-function sortUniv(graduates) {
-   const universities = []; 
-  graduates.sort(function(a, b) {
-    let invOne = a.university.toUpperCase();
-    let invTwo = b.university.toUpperCase();
-    if (invOne < invTwo) {
-      return -1;
-    }
-    if (invOne > invTwo) {
-      return 1;
-    }
-    return 0;
+function getUniversities(graduates) {
+  const universities = []; 
 
-  });
+  for (let i = 0; i < graduates.length; i++) {
+    const uni = graduates[i];
+    return universities.push(uni.university);
+  }
+  function sortUniv(graduates) {
+   graduates.sort(function(a, b) {
+     let invOne = a.university.toUpperCase();
+     let invTwo = b.university.toUpperCase();
+     if (invOne < invTwo) {
+       return -1;
+     }
+     if (invOne > invTwo) {
+       return 1;
+     }
+     return 0;
+   });
+   return universities;
+ }
 
   console.log(universities);
 }
@@ -112,15 +119,16 @@ function firstNameEmm(graduates) {
 
 
 /* Request 3: Find out how many universities have the string "Uni" included in their name. Create a new array called unisWithUni that contains them all. This will be an array of objects. Log the result. */
-function getUniv (graduates, uniName) {
-  const unisWithUni = [];
-  
-  unisWithUni = graduates.filter((uniInc) => 
-    uniName.university.slice(0,3) === "uni")
 
-  return unisWithUni;
+function getUniv (universities) {
+  const unisWithUni = [];
+
+  universities.forEach(function(uniPick) {
+    unisWithUni.push(uniPick.value.includes("Uni"))
+  });
+  console.log(unisWithUni);
 }
-console.log(unisWithUni);
+
 
 
 // ==== ADVANCED Array Methods ====
@@ -163,9 +171,10 @@ function getNames(zooAnimals) {
 The zoos need a list of all their animal's names (animal_name only) converted to lower case. Using map, create a new array of strings named lowCaseAnimalNames, each string following this pattern: "jackal, asiatic". Log the resut.
 
 */
+const lowCaseAnimalNames = zooAnimals.map(function(currentValue){
+  return currentValue.animal_name.toLowerCase();
+});
 
-
-const lowCaseAnimalNames = [];
 console.log(lowCaseAnimalNames);
 
 /* Request 3: .filter() 
@@ -173,7 +182,9 @@ console.log(lowCaseAnimalNames);
 The zoos are concerned about animals with a lower population count. Using filter, create a new array of objects called lowPopulationAnimals which contains only the animals with a population less than 5.
 
 */
-const lowPopulationAnimals = [];
+const lowPopulationAnimals = zooAnimals.filter(function(currentValue){
+  return currentValue.population < 5;
+});
 console.log(lowPopulationAnimals);
 
 /* Request 4: .reduce() 
@@ -181,7 +192,11 @@ console.log(lowPopulationAnimals);
 The zoos need to know their total animal population across the United States. Find the total population from all the zoos using the .reduce() method. Remember the reduce method takes two arguments: a callback (which itself takes two args), and an initial value for the count.
 
 */
-const populationTotal = 0;
+const populationTotal = zooAnimals.reduce(function(accumulator, currentValue){
+
+  return accumulator + currentValue.populationTotal;
+}, 0);
+
 console.log(populationTotal);
 
 
