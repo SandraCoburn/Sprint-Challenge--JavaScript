@@ -124,7 +124,12 @@ function getUniv (universities) {
   const unisWithUni = [];
 
   universities.forEach(function(uniPick) {
-    unisWithUni.push(uniPick.value.includes("Uni"))
+
+    const isIncluded = uniPick.university.includes("Uni");
+
+    if(isIncluded) {
+      return unisWithUni.push(university)
+    }
   });
   console.log(unisWithUni);
 }
