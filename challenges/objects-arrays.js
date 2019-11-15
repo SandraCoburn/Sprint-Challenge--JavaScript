@@ -128,7 +128,7 @@ function getUniv (universities) {
     const isIncluded = uniPick.university.includes("Uni");
 
     if(isIncluded) {
-      return unisWithUni.push(university)
+      unisWithUni.push(university)
     }
   });
   console.log(unisWithUni);
